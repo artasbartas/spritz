@@ -9,36 +9,40 @@
 <script>
 var token = 'e5490a20256d3c01224895400b9071319791f237';
 var url = 'http://blog.readability.com/2011/02/step-up-be-heard-readability-ideas/';
-
+var mario = '';
 
 function fetchArticle(url) {
   var req = new XMLHttpRequest();
-  req.open('GET', 'readability.com/api/content/v1/parser?' +
-    'url=' + url + '&token' + token, true);
-  req.onload = function () {
-    if (req.readyState === 4) {
-      if (req.status === 200) {
+  if('withCredentials' in req) {
+    req.open('GET', 'https://readability.com/api/content/v1/parser?' + 'url=' + url + '&token=' + token, true);
+    req.setRequestHeader('Content-Type', 'application/json');
+    req.onload = function () {
+      if (req.readyState === 4) {
+        if (req.status === 200) {
         
-        console.log(req.responseText);
+          console.log(req.responseText);
         
-        var response = JSON.parse(req.responseText);
-        var title = response.title;
-        var author = response.author;
-        var word_count = response.word_count;
-        var content = response.content;
-        
-        console.log(title);
-        console.log(author);
-        console.log(word_count);
-        console.log(content);
-       
-        });
-      } else {
-        console.log('Request failed: ' + req.statusText);
-      }
+          var response = JSON.parse(req.responseText);
+          var title = response.title;
+          var author = response.author;
+          var word_count = response.word_count;
+          var content = response.content;
+          
+          console.log(title);
+          console.log(author);
+          console.log(word_count);
+          console.log(content);
+         
+          };
+        } else {
+          console.log('Request failed: ' + req.statusText);
+        }
     }
-  };
-  req.send(null);
+    req.withCredentials = true;
+    req.send(null);
+  } else {
+        errback(new Error('CORS not supported'));
+    }
 }
 
 </script>
