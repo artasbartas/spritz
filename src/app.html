@@ -15,7 +15,7 @@ function fetchArticle(url) {
   if('withCredentials' in req) {
     req.open('GET', 'https://readability.com/api/content/v1/parser?' + 'url=' + url + '&token=' + token, true);
     req.setRequestHeader('Content-Type', 'application/json');
-    req.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:8000/');
+    req.setRequestHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:8080/');
     req.onload = function() {
       if (req.readyState === 4) {
         if (req.status === 200) {
