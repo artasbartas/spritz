@@ -13,9 +13,9 @@ var url = 'http://blog.readability.com/2011/02/step-up-be-heard-readability-idea
 function fetchArticle(url) {
   var req = new XMLHttpRequest();
   if('withCredentials' in req) {
-    req.open('GET', 'https://readability.com/api/content/v1/parser?' + 'url=' + url + '&token=' + token, true);
-    req.setRequestHeader('Content-Type', 'application/json');
-    req.setRequestHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:8080/');
+    req.open('GET', 'http://crossorigin.me/https://readability.com/api/content/v1/parser?' + 'url=' + url + '&token=' + token, true);
+//    req.setRequestHeader('Content-Type', 'application/json');
+//    req.setRequestHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:8080/');
     req.onload = function() {
       if (req.readyState === 4) {
         if (req.status === 200) {
@@ -24,7 +24,8 @@ function fetchArticle(url) {
           var title = response.title;
           var author = response.author;
           var word_count = response.word_count;
-          var content = response.content;
+          var html = response.content;
+          var content = stripHtml(html);
           
           console.log(title);
           console.log(author);
@@ -36,11 +37,18 @@ function fetchArticle(url) {
           console.log('Request failed: ' + req.statusText);
         }
     }
-    req.withCredentials = true;
+//    req.withCredentials = true;
     req.send();
   } else {
         errback(new Error('CORS not supported'));
     }
+}
+
+// Strip away HTML tags from the article
+function stripHtml(html) {
+   var temp = document.createElement("div");
+   temp.innerHTML = html;
+   return temp.textContent || temp.innerText || "";
 }
 
 </script>
