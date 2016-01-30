@@ -26,11 +26,12 @@ function fetchArticle(url) {
           var word_count = response.word_count;
           var html = response.content;
           var content = stripHtml(html);
+          var articleObj = {title: title, author: author, word_count: word_count, content: content};
           
-          console.log(title);
-          console.log(author);
-          console.log(content);
-          console.log(word_count);
+          console.log(articleObj);
+//          console.log(author);
+//          console.log(content);
+//          console.log(word_count);
           
           };
         } else {
