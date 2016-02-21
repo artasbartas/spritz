@@ -1,0 +1,15 @@
+# package management
+node_modules
+bower
+components
+
+# build artifacts
+build
+private
+
+# OS artifacts
+.DS_Storep
+
+# logging output
+logs
+*.log

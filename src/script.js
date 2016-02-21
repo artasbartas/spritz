@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<p id="demo">Fetching an object</p>
-
-<button type="button" onclick="fetchArticle(url)">Let's go</button>
-
-<script type = "text/javascript">
 var token = 'e5490a20256d3c01224895400b9071319791f237';
 var url = 'http://blog.readability.com/2011/02/step-up-be-heard-readability-ideas/';
 
@@ -22,20 +13,17 @@ function fetchArticle(url) {
           var article = new Article(); // use Article prototype to instantiate a new article
           article.author = response.author;
           article.title = response.title;
+          article.date_published = response.word_count;
           article.content = stripHtml(response.content);
           article.url = url;
-          article.created = new Date();
           article.wcount = response.word_count;
-          article.domain = response.domain;
+          article.domain = funtion getDomain (url);
 
-          // print only enumerable properties
-          for(i in article) {
-    		if (article.hasOwnProperty(i)) {
-        		console.log (i, ":", article[i])
-    		}
-		  }
-          return article;
-
+          console.log(article);
+//          console.log(author);
+//          console.log(content);
+//          console.log(word_count);
+          
           };
         } else {
           console.log('Request failed: ' + req.statusText);
@@ -53,17 +41,18 @@ function stripHtml(html) {
 
 // Implementing object prototype pattern for Articles
 var Article = function() {
-  this.author         = null;
-  this.title          = null;
-  this.content        = null;
-  this.url            = null;
-  this.created = null;
-  this.status         = "new";
-  this.wcount         = null;
+  this.author         = ;
+  this.title          = ;
+  this.date_published = ;
+  this.content        = ;
+  this.url            = ;
+  this.date_retrieved = new Date();
+  this.reading_status = "New";
+  this.wcount         = ;
   this.wread          = 0;
-  this.language       = null;
-  this.tags           = null;
-  this.domain         = null;
+  this.language       = ;
+  this.tags           = ;
+  this.domain         = ;
 }
 
 Article.prototype = function() {
@@ -77,17 +66,13 @@ Article.prototype = function() {
   };
 
   var domain = function() {
-    return url;
+    // Apply brake pads
   };
 
   return {
     doActionOne: action_one,
     doActionTwo: action_two,
-    getDomain: domain
+    getDomain: domain;
   }
 
 }();
-</script>
-
-</body>
-</html>

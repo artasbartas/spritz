@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<body>
 
-<p id="demo">Fetching an object</p>
-
-<button type="button" onclick="fetchArticle(url)">Let's go</button>
-
-<script type = "text/javascript">
 var token = 'e5490a20256d3c01224895400b9071319791f237';
 var url = 'http://blog.readability.com/2011/02/step-up-be-heard-readability-ideas/';
 
@@ -24,7 +16,7 @@ function fetchArticle(url) {
           article.title = response.title;
           article.content = stripHtml(response.content);
           article.url = url;
-          article.created = new Date();
+          article.date_retrieved = new Date();
           article.wcount = response.word_count;
           article.domain = response.domain;
 
@@ -57,10 +49,10 @@ var Article = function() {
   this.title          = null;
   this.content        = null;
   this.url            = null;
-  this.created = null;
-  this.status         = "new";
+  this.date_retrieved = null;
+  this.reading_status = null;
   this.wcount         = null;
-  this.wread          = 0;
+  this.wread          = null;
   this.language       = null;
   this.tags           = null;
   this.domain         = null;
@@ -88,6 +80,3 @@ Article.prototype = function() {
 
 }();
 </script>
-
-</body>
-</html>
